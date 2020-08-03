@@ -1,0 +1,12 @@
+
+npx create-electron-app my-app
+cd my-app
+npm start
+ELECTRON_ENABLE_LOGGING=1 npm start
+
+python3.8 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install simplecalculator
+
+demo_00_child_process
