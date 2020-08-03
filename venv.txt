@@ -12,5 +12,13 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install simplecalculator
 
+pip install flask
+pip install Flask-Cors
+
 demo_00_child_process
 demo_01_python_shell
+
+sudo netstat -tulnp | grep :5001
+tcp        0      0 127.0.0.1:5001          0.0.0.0:*               LISTEN      8667/python3        
+sudo kill 8667
+

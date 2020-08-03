@@ -1,30 +1,41 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
+
+let input = document.querySelector('#input')
+let result = document.querySelector('#result')
+let btn = document.querySelector('#btn')
 
 function sendToPython() {
   var { PythonShell } = require('python-shell');
 
   let options = {
-    mode: 'text',
-    args: [input.value]
+    mode: 'text'
   };
-
-  PythonShell.run('./py/calc.py', options, function (err, results) {
+  
+  PythonShell.run('./py/server.py', options, function (err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
-    console.log('results: ', results);
-    result.textContent = results[0];
-  });
+    console.log('response: ', results);
 
+  });
 }
 
+function onclick(){
+
+  fetch(`http://127.0.0.1:5001/${input.value}`).then((data)=>{      
+      return data.text();
+      
+  }).then((text)=>{
+    console.log("data: ", text);
+    result.textContent = text;
+  }).catch(e=>{
+    console.log(e);
+  })
+
+}
+sendToPython();
+
 btn.addEventListener('click', () => {
-  sendToPython();
+  onclick();
 });
 
-btn.dispatchEvent(new Event('click'));
+btn.dispatchEvent(new Event('click'))
 
