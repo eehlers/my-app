@@ -6,18 +6,18 @@
 // process.
 
 function sendToPython() {
-  var python = require('child_process').spawn('python', ['./py/calc.py', input.value]);
-  python.stdout.on('data', function (data) {
-    console.log("Python response: ", data.toString('utf8'));
-    result.textContent = data.toString('utf8');
-  });
+  var { PythonShell } = require('python-shell');
 
-  python.stderr.on('data', (data) => {
-    console.error(`stderr: ${data}`);
-  });
+  let options = {
+    mode: 'text',
+    args: [input.value]
+  };
 
-  python.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
+  PythonShell.run('./py/calc.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('results: ', results);
+    result.textContent = results[0];
   });
 
 }

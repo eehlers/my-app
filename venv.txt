@@ -1,6 +1,9 @@
 
 npx create-electron-app my-app
 cd my-app
+
+npm install python-shell
+
 npm start
 ELECTRON_ENABLE_LOGGING=1 npm start
 
@@ -10,3 +13,4 @@ pip install --upgrade pip
 pip install simplecalculator
 
 demo_00_child_process
+demo_01_python_shell
