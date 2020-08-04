@@ -30,7 +30,7 @@ class Foo:
         self.delete = True
         self.dep = None
         self.deployLegacy = False
-        self.fileName = "bin/app.hex"
+        self.fileName = "/home/erik/projects/electron/flask/my-app/bin/app.hex"
         #self.icon = "010000000000ffffffffffffffffffbffe0ffc9ff99ff91ff89ff19ff39ff10ff8bffeffffffffffff"
         self.icon = "010000000000ffffffffffffffffffffff83c183c1f3f9f3c1f3c1f3cf83c183c1ffffffffffffffff"
         self.installparamsSize = None

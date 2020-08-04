@@ -27,10 +27,10 @@ pip install pyinstaller
 
 pip install /home/erik/projects/checksig/refactor/repos/blue-loader-python.checksig-custody
 
-pyinstaller py/server.py
-
 python py/server.py
 python py/cs/install.py
+
+pyinstaller py/server.py
 
 ===
 

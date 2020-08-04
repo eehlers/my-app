@@ -35,8 +35,8 @@ function onclick(){
   })
 }
 
-sendToPython_dev();
-//sendToPython_prod();
+//sendToPython_dev();
+sendToPython_prod();
 
 btn.addEventListener('click', () => {
   onclick();
