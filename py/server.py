@@ -26,6 +26,11 @@ def calc(input):
 def install():    
     return "install"
 
+@app.route("/sign")
+@cross_origin()
+def sign():    
+    return "sign"
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5001)
 
