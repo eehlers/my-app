@@ -3,19 +3,19 @@ let input = document.querySelector('#input')
 let result = document.querySelector('#result')
 let btn = document.querySelector('#btn')
 
-//function sendToPython() {
-//  var { PythonShell } = require('python-shell');
-//  let options = {
-//    mode: 'text'
-//  };
-//  PythonShell.run('./py/server.py', options, function (err, results) {
-//    if (err) throw err;
-//    // results is an array consisting of messages collected during execution
-//    console.log('response: ', results);
-//  });
-//}
+function sendToPython_dev() {
+  var { PythonShell } = require('python-shell');
+  let options = {
+    mode: 'text'
+  };
+  PythonShell.run('./py/server.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('response: ', results);
+  });
+}
 
-function sendToPython() {
+function sendToPython_prod() {
     pyProc = require('child_process').execFile("dist/server/server")
     if (pyProc != null) {
         //console.log(pyProc)
@@ -35,7 +35,8 @@ function onclick(){
   })
 }
 
-sendToPython();
+sendToPython_dev();
+//sendToPython_prod();
 
 btn.addEventListener('click', () => {
   onclick();
