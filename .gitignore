@@ -91,3 +91,6 @@ out/
 package-lock.json
 venv
 yarn.lock
+build
+dist
+py/__pycache__

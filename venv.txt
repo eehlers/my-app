@@ -7,6 +7,14 @@ npm install python-shell
 npm start
 ELECTRON_ENABLE_LOGGING=1 npm start
 
+sudo apt install rpm
+
+npm run make
+
+./out/my-app-linux-x64/my-app
+
+===
+
 python3.8 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
