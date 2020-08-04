@@ -29,8 +29,16 @@ pip install /home/erik/projects/checksig/refactor/repos/blue-loader-python.check
 
 pyinstaller py/server.py
 
+python py/server.py
+python py/cs/install.py
+
+===
+
 demo_00_child_process
 demo_01_python_shell
+demo_02_flask, demo_02_flask_dist
+
+===
 
 netstat -tulnp | grep :5001
 

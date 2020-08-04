@@ -24,7 +24,9 @@ def calc(input):
 @app.route("/install")
 @cross_origin()
 def install():    
-    return "install"
+    from cs.install import f
+    f()
+    return "install2"
 
 @app.route("/sign")
 @cross_origin()

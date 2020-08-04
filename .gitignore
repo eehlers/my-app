@@ -93,4 +93,4 @@ venv
 yarn.lock
 build
 dist
-py/__pycache__
+__pycache__
