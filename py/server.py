@@ -16,10 +16,15 @@ def calcOp(text):
 
 app = Flask(__name__)
 
-@app.route("/<input>")
+@app.route("/calc/<input>")
 @cross_origin()
 def calc(input):    
     return calcOp(input)
+
+@app.route("/install")
+@cross_origin()
+def install():    
+    return "install"
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5001)

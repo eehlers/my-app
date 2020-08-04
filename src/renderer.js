@@ -25,7 +25,7 @@ function sendToPython_prod() {
 }
 
 function onclick(){
-  fetch(`http://127.0.0.1:5001/${input.value}`).then((data)=>{      
+  fetch(`http://127.0.0.1:5001/calc/${input.value}`).then((data)=>{      
       return data.text();
   }).then((text)=>{
     console.log("data: ", text);
@@ -43,4 +43,29 @@ btn.addEventListener('click', () => {
 });
 
 btn.dispatchEvent(new Event('click'))
+
+//const electron = require('electron')
+//const ipc = electron.ipcRenderer
+
+const syncMsgBtn = document.querySelector('#sendSyncMsgBtn')
+syncMsgBtn.addEventListener('click', () => {
+    console.log("Install renderer begin");
+    //const reply = ipc.sendSync('sync-message', 'Sent from main window')
+    //const message = `Synchronous message reply: ${reply}`
+    //document.querySelector('#syncReply').innerHTML = message
+    //var python = require('child_process').spawn('python', ['./foo.py']);
+    //python.stdout.on('data', function(data) {
+    //    console.log("data: ", data.toString('utf8'));
+    //});
+    fetch("http://127.0.0.1:5001/install").then((data)=>{      
+        return data.text();
+    }).then((text)=>{
+        console.log("data: ", text);
+        //result.textContent = text;
+        document.querySelector('#syncReply').innerHTML = text
+    }).catch(e=>{
+        console.log(e);
+    })
+    console.log("Install renderer end");
+})
 
