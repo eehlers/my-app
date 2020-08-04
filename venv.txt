@@ -25,6 +25,8 @@ pip install Flask-Cors
 
 pip install pyinstaller
 
+pip install /home/erik/projects/checksig/refactor/repos/blue-loader-python.checksig-custody
+
 pyinstaller py/server.py
 
 demo_00_child_process
