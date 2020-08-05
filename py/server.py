@@ -18,19 +18,19 @@ app = Flask(__name__)
 
 @app.route("/calc/<input>")
 @cross_origin()
-def calc(input):    
+def calc(input):
     return calcOp(input)
 
 @app.route("/install")
 @cross_origin()
-def install():    
+def install():
     from cs.install import f
     f()
     return "install2"
 
 @app.route("/sign")
 @cross_origin()
-def sign():    
+def sign():
     return "sign"
 
 if __name__ == "__main__":

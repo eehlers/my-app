@@ -31,6 +31,7 @@ python py/server.py
 python py/cs/install.py
 
 pyinstaller py/server.py
+./dist/server/server
 
 ===
 
