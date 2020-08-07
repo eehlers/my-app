@@ -4,15 +4,18 @@ let result = document.querySelector('#result')
 let btn = document.querySelector('#btn')
 
 function sendToPython_dev() {
-  var { PythonShell } = require('python-shell');
-  let options = {
-    mode: 'text'
-  };
-  PythonShell.run('./py/server.py', options, function (err, results) {
-    if (err) throw err;
-    // results is an array consisting of messages collected during execution
-    console.log('response: ', results);
-  });
+    let { PythonShell } = require('python-shell');
+    let options = {
+        mode: 'text'
+    };
+    PythonShell.run('./py/server.py', options, function (err, results) {
+        if (err) throw err;
+        console.log('response: ', results);
+    }).on('message', function (message) {
+        console.log('flask', message);
+    }).on('stderror', function (message) {
+        console.log('flask error', message);
+    });
 }
 
 function sendToPython_prod() {
@@ -35,8 +38,8 @@ function onclick(){
   })
 }
 
-//sendToPython_dev();
-sendToPython_prod();
+sendToPython_dev();
+//sendToPython_prod();
 
 btn.addEventListener('click', () => {
   onclick();
