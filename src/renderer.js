@@ -27,6 +27,9 @@ function sendToPython_prod() {
     }
 }
 
+sendToPython_dev();
+//sendToPython_prod();
+
 function onclick(){
   fetch(`http://127.0.0.1:5001/calc/${input.value}`).then((data)=>{      
       return data.text();
@@ -37,9 +40,6 @@ function onclick(){
     console.log(e);
   })
 }
-
-sendToPython_dev();
-//sendToPython_prod();
 
 btn.addEventListener('click', () => {
   onclick();
