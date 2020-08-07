@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['py/server.py'],
-             pathex=['/home/erik/projects/electron/flask/my-app'],
+a = Analysis(['py\\server.py'],
+             pathex=['C:\\checksig\\my-app'],
              binaries=[],
              datas=[],
              hiddenimports=[],

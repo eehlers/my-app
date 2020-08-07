@@ -43,3 +43,24 @@ demo_02_flask, demo_02_flask_dist
 
 netstat -tulnp | grep :5001
 
+# Windows
+
+python -m venv venv
+source venv/Scripts/activate
+pip install /c/checksig/blue-loader-python
+
+===
+
+npm install electron-forge
+npm install electron-prebuilt-compile --save-dev
+npm install electron-squirrel-startup
+npm install python-shell
+npm install electron-compile
+
+npm install npm-install-all -g
+npm-install-all
+
+npm start
+
+out/my-app-win32-x64/my-app.exe
+
