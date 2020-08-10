@@ -13,6 +13,8 @@ npm run make
 
 ./out/my-app-linux-x64/my-app
 
+npm install electron-log
+npm install tree-kill
 ===
 
 python3.8 -m venv venv
