@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+var mainWindow = 0;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -8,7 +9,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -21,6 +22,10 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+    console.log("000 createWindow");
+    var log = require('electron-log');
+    log.info('010 createWindow');
 };
 
 // This method will be called when Electron has finished
@@ -32,6 +37,7 @@ app.on('ready', createWindow);
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+    mainWindow.webContents.send('ping', 'whoooooooh!')
   if (process.platform !== 'darwin') {
     app.quit();
   }
