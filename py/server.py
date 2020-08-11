@@ -42,6 +42,8 @@ def install():
 @cross_origin()
 def sign():
     app.logger.info("sign0")
+    from cs.sign import f
+    f()
     app.logger.info("sign1")
     return "sign"
 

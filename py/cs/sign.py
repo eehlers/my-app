@@ -78,7 +78,7 @@ def get_client(testnet):
     finally:
         client.close()
 
-def sign(txid, keychain, device_index = None):
+def sign(txid, keychain):
     "Add a signature to a PSBT"
 
     keychain = keychain.lower()
@@ -98,9 +98,12 @@ def sign(txid, keychain, device_index = None):
     write_psbt(txid, psbt, keychain, STATE_SIGN, device_fingerprint)
     return psbt
 
-txid = "9a9a47f3da0469fac0193af00da484e9350763bf5bf3c30229696203127e7da6"
-keychain = "frzn_fede"
-sign(txid, keychain)
-#sign(txid, keychain, "a7d7d1a0")
-print("Sign done")
+def f():
+    txid = "9a9a47f3da0469fac0193af00da484e9350763bf5bf3c30229696203127e7da6"
+    keychain = "frzn_fede"
+    sign(txid, keychain)
+    print("Sign done")
+
+if __name__ == '__main__':
+    f()
 
