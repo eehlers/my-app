@@ -12,11 +12,11 @@ function sendToPython_dev() {
 
     pyshell = new PythonShell('./py/server.py', options);
     pyshell.on('message', function (message) {
-        console.log('flask', message);
+        console.log('main flask message', message);
         mainWindow.webContents.send('message', message);
     });
     pyshell.on('stderror', function (message) {
-        console.log('flask error', message);
+        console.log('main flask stderror', message);
         mainWindow.webContents.send('stderror', message);
     });
     console.log(pyshell.childProcess.pid);
