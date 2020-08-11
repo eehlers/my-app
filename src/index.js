@@ -3,6 +3,10 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 let mainWindow;
 let pyshell;
+let pyproc;
+
+let DEV=true;
+//let DEV=false;
 
 function sendToPython_dev() {
     let { PythonShell } = require('python-shell');
@@ -22,14 +26,22 @@ function sendToPython_dev() {
     console.log(pyshell.childProcess.pid);
 }
 
-//function sendToPython_prod() {
-//    pyProc = require('child_process').execFile("dist/server/server")
-//    if (pyProc != null) {
-//        //console.log(pyProc)
-//        //console.log('child process success on port ' + port)
-//        console.log('child process success')
-//    }
-//}
+function sendToPython_prod() {
+    pyproc = require('child_process').execFile("dist/server/server")
+    console.log("PID", pyproc.pid);
+    pyproc.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+      mainWindow.webContents.send('message', data);
+    });
+    pyproc.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+      mainWindow.webContents.send('stderror', data);
+    });
+    pyproc.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+      //mainWindow.webContents.send('message', code);
+    });
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -52,8 +64,11 @@ const createWindow = () => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-    sendToPython_dev();
-    //sendToPython_prod();
+    if (DEV) {
+        sendToPython_dev();
+    } else {
+        sendToPython_prod();
+    }
 };
 
 // This method will be called when Electron has finished
@@ -65,14 +80,16 @@ app.on('ready', createWindow);
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-    console.log("000 window-all-closed");
   if (process.platform !== 'darwin') {
-    console.log("100 window-all-closed");
-    pyshell.childProcess.kill();
-    console.log("110 window-all-closed");
+    if (DEV) {
+        console.log("PID", pyshell.childProcess.pid);
+        pyshell.childProcess.kill();
+    } else {
+        console.log("PID", pyproc.pid);
+        pyproc.kill();
+    }
     app.quit();
   }
-    console.log("900 window-all-closed");
 });
 
 app.on('activate', () => {

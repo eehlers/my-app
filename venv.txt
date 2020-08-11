@@ -3,6 +3,8 @@ npx create-electron-app my-app
 cd my-app
 
 npm install python-shell
+#npm install electron-log
+#npm install tree-kill
 
 npm start
 FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
@@ -13,8 +15,6 @@ npm run make
 
 ./out/my-app-linux-x64/my-app
 
-npm install electron-log
-npm install tree-kill
 ===
 
 python3.8 -m venv venv
@@ -47,4 +47,12 @@ demo_02_flask, demo_02_flask_dist
 ===
 
 netstat -tulnp | grep :5001
+
+# NOTES
+
+FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
+
+Setting FLASK_ENV=development causes werkzeug to restart the server
+which prevents javascript from being able to kill the process
+at shutdown.
 
