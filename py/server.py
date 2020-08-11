@@ -41,7 +41,8 @@ def install():
 @app.route("/sign")
 @cross_origin()
 def sign():
-    app.logger.info("sign")
+    app.logger.info("sign0")
+    app.logger.info("sign1")
     return "sign"
 
 if __name__ == "__main__":
