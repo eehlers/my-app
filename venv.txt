@@ -28,10 +28,12 @@ pip install Flask-Cors
 pip install pyinstaller
 
 pip install /home/erik/projects/checksig/refactor/repos/blue-loader-python.checksig-custody
+pip install -e /home/erik/projects/checksig/refactor/repos/HWI.checksig-custody
 
 FLASK_APP=py.server FLASK_ENV=development flask run
 FLASK_ENV=development python py/server.py
 python py/cs/install.py
+python py/cs/sign.py
 
 pyinstaller py/server.py
 ./dist/server/server
