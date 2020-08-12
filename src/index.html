@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <title>CheckSig</title>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <h1>CheckSig</h1>
+    <h2>Install</h2>
+    <button id="selectBtn">Choose File</button>
+    <p id="fileName"></p>
     <button id="installBtn">Install</button>
-    <p id="installReply">Status</p>
-
+    <h2>Sign</h2>
     <button id="signBtn">Sign</button>
-    <p id="signReply">Status</p>
-
-    <button id="selectBtn">abc</button>
-
-    </br>
-    <span id="output"></span>
-
+    <h2>Status</h2>
+    <p id="output">Status</p>
     <script src="./renderer.js"></script>
   </body>
 </html>
