@@ -63,3 +63,30 @@ signBtn.addEventListener('click', () => {
     console.log("Sign renderer end");
 })
 
+const {dialog} = require('electron').remote;
+
+document.querySelector('#selectBtn').addEventListener('click', function (event) {
+    filters = [
+        { name: 'xxx', extensions: ['*.hex'] }
+    ];
+    options = {
+        //title: 'Select file',
+        //buttonLabel: 'confirm',
+        //filters: filters,
+        properties: ['openFile']
+        //message: 'message'
+    };
+    dialog.showOpenDialog(null, {
+        //title: 'Select file',
+        //buttonLabel: 'confirm',
+        //filters: ['*.hex'],
+        properties: ['openFile']
+        //message: 'message'
+    }).then(result => {
+        console.log(result.canceled)
+        console.log(result.filePaths)
+    }).catch(err => {
+        console.log(err)
+    });
+});
+
