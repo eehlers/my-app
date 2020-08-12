@@ -20,7 +20,6 @@ npm run make
 python3.8 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install simplecalculator
 
 pip install flask
 pip install Flask-Cors
@@ -48,7 +47,9 @@ demo_02_flask, demo_02_flask_dist
 
 netstat -tulnp | grep :5001
 
+############
 # NOTES
+############
 
 FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
 
@@ -56,7 +57,28 @@ Setting FLASK_ENV=development causes werkzeug to restart the server
 which prevents javascript from being able to kill the process
 at shutdown.
 
+===
+
+    <h1>Simple Python Calculator!</h1>
+    <p>Input something like <code>1 + 1</code>.</p>
+    <input id="input" value="1 + 1"></input>
+    <input id="btn" type="button" value="Send to Python!"></input>
+    </br>
+    Got <span id="result"></span>
+
+let input = document.querySelector('#input')
+  fetch(`http://127.0.0.1:5001/calc/${input.value}`).then((data)=>{      
+    result.textContent = text;
+
+@app.route("/calc/<input>")
+@cross_origin()
+def calc(input):
+    app.logger.info("calc")
+    return calcOp(input)
+
+############
 # Windows
+############
 
 python -m venv venv
 source venv/Scripts/activate

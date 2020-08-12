@@ -5,8 +5,8 @@ let mainWindow;
 let pyshell;
 let pyproc;
 
-//let DEV=true;
-let DEV=false;
+let DEV=true;
+//let DEV=false;
 
 function sendToPython_dev() {
     let { PythonShell } = require('python-shell');

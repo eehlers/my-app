@@ -1,8 +1,5 @@
 
-let input = document.querySelector('#input')
-let result = document.querySelector('#result')
 let output = document.querySelector('#output')
-let btn = document.querySelector('#btn')
 
 require('electron').ipcRenderer.on('message', (event, message) => {
     console.log('renderer flask message:', message);
@@ -13,24 +10,6 @@ require('electron').ipcRenderer.on('stderror', (event, message) => {
     console.log('renderer flask stderror:', message);
     output.textContent = message;
 })
-
-function onclick(){
-  fetch(`http://127.0.0.1:5001/calc/${input.value}`).then((data)=>{      
-      console.log("data: ", data);
-      return data.text();
-  }).then((text)=>{
-    console.log("text: ", text);
-    result.textContent = text;
-  }).catch(e=>{
-    console.log("error :", e);
-  })
-}
-
-btn.addEventListener('click', () => {
-  onclick();
-});
-
-//btn.dispatchEvent(new Event('click'))
 
 const installBtn = document.querySelector('#installBtn')
 installBtn.addEventListener('click', () => {
