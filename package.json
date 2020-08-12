@@ -45,8 +45,13 @@
     }
   },
   "dependencies": {
+    "child_process": "^1.0.2",
+    "electron-compile": "^6.4.4",
+    "electron-forge": "^5.2.4",
     "electron-log": "^4.2.2",
     "electron-squirrel-startup": "^1.0.0",
+    "npm-install-all": "^1.1.21",
+    "path": "^0.12.7",
     "python-shell": "^2.0.1",
     "tree-kill": "^1.2.2"
   },
@@ -56,6 +61,7 @@
     "@electron-forge/maker-rpm": "6.0.0-beta.52",
     "@electron-forge/maker-squirrel": "6.0.0-beta.52",
     "@electron-forge/maker-zip": "6.0.0-beta.52",
-    "electron": "9.1.2"
+    "electron": "^9.1.2",
+    "electron-prebuilt-compile": "8.2.0"
   }
 }

@@ -2,9 +2,12 @@
 
 block_cipher = None
 
-
+# linux
 a = Analysis(['py/server.py'],
              pathex=['/home/erik/projects/electron/flask/my-app'],
+# windows
+#a = Analysis(['py\\server.py'],
+#             pathex=['C:\\checksig\\my-app'],
              binaries=[],
              datas=[],
              hiddenimports=[],

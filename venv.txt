@@ -56,3 +56,25 @@ Setting FLASK_ENV=development causes werkzeug to restart the server
 which prevents javascript from being able to kill the process
 at shutdown.
 
+# Windows
+
+python -m venv venv
+source venv/Scripts/activate
+pip install /c/checksig/blue-loader-python
+
+===
+
+npm install electron-forge
+npm install electron-prebuilt-compile --save-dev
+npm install electron-squirrel-startup
+npm install python-shell
+npm install electron-compile
+
+npm install npm-install-all -g
+npm-install-all
+
+npm start
+
+pyinstaller py/server.py
+out/my-app-win32-x64/my-app.exe
+
