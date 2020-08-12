@@ -1,16 +1,17 @@
 
 let input = document.querySelector('#input')
 let result = document.querySelector('#result')
+let output = document.querySelector('#output')
 let btn = document.querySelector('#btn')
 
 require('electron').ipcRenderer.on('message', (event, message) => {
     console.log('renderer flask message:', message);
-    result.textContent = message;
+    output.textContent = message;
 })
 
 require('electron').ipcRenderer.on('stderror', (event, message) => {
     console.log('renderer flask stderror:', message);
-    result.textContent = message;
+    output.textContent = message;
 })
 
 function onclick(){
@@ -85,6 +86,7 @@ document.querySelector('#selectBtn').addEventListener('click', function (event) 
     }).then(result => {
         console.log(result.canceled)
         console.log(result.filePaths)
+        output.textContent = result.filePaths;
     }).catch(err => {
         console.log(err)
     });
