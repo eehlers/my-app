@@ -3,9 +3,11 @@ npx create-electron-app my-app
 cd my-app
 
 npm install python-shell
+#npm install electron-log
+#npm install tree-kill
 
 npm start
-ELECTRON_ENABLE_LOGGING=1 npm start
+FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
 
 sudo apt install rpm
 
@@ -26,9 +28,12 @@ pip install Flask-Cors
 pip install pyinstaller
 
 pip install /home/erik/projects/checksig/refactor/repos/blue-loader-python.checksig-custody
+pip install -e /home/erik/projects/checksig/refactor/repos/HWI.checksig-custody
 
-python py/server.py
+FLASK_APP=py.server FLASK_ENV=development flask run
+FLASK_ENV=development python py/server.py
 python py/cs/install.py
+python py/cs/sign.py
 
 pyinstaller py/server.py
 ./dist/server/server
@@ -42,6 +47,14 @@ demo_02_flask, demo_02_flask_dist
 ===
 
 netstat -tulnp | grep :5001
+
+# NOTES
+
+FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
+
+Setting FLASK_ENV=development causes werkzeug to restart the server
+which prevents javascript from being able to kill the process
+at shutdown.
 
 # Windows
 
@@ -62,5 +75,6 @@ npm-install-all
 
 npm start
 
+pyinstaller py/server.py
 out/my-app-win32-x64/my-app.exe
 

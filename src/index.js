@@ -1,5 +1,47 @@
+
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+let mainWindow;
+let pyshell;
+let pyproc;
+
+//let DEV=true;
+let DEV=false;
+
+function sendToPython_dev() {
+    let { PythonShell } = require('python-shell');
+    let options = {
+        mode: 'text'
+    };
+
+    pyshell = new PythonShell('./py/server.py', options);
+    pyshell.on('message', function (message) {
+        console.log('main flask message', message);
+        mainWindow.webContents.send('message', message);
+    });
+    pyshell.on('stderror', function (message) {
+        console.log('main flask stderror', message);
+        mainWindow.webContents.send('stderror', message);
+    });
+    console.log(pyshell.childProcess.pid);
+}
+
+function sendToPython_prod() {
+    pyproc = require('child_process').execFile("dist/server/server")
+    console.log("PID", pyproc.pid);
+    pyproc.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+      mainWindow.webContents.send('message', data);
+    });
+    pyproc.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+      mainWindow.webContents.send('stderror', data);
+    });
+    pyproc.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+      //mainWindow.webContents.send('message', code);
+    });
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -8,7 +50,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -21,6 +63,12 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+    if (DEV) {
+        sendToPython_dev();
+    } else {
+        sendToPython_prod();
+    }
 };
 
 // This method will be called when Electron has finished
@@ -33,6 +81,13 @@ app.on('ready', createWindow);
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    if (DEV) {
+        console.log("PID", pyshell.childProcess.pid);
+        pyshell.childProcess.kill();
+    } else {
+        console.log("PID", pyproc.pid);
+        pyproc.kill();
+    }
     app.quit();
   }
 });

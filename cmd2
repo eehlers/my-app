@@ -1,0 +1,1 @@
+gv venv.txt package.json cmd src/index.html src/*.js $(find py -name "*py" | sort)
