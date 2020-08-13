@@ -22,7 +22,7 @@ installBtn.addEventListener('click', () => {
     console.log("fileName: ", fileName);
     let b = new Buffer(fileName);
     let s = b.toString('base64');
-    fetch(`http://127.0.0.1:5001/install/${s}`).then((data)=>{      
+    fetch(`http://127.0.0.1:5001/install/${s}`).then((data)=>{
         console.log("data: ", data);
         return data.text();
     }).then((text)=>{
@@ -41,7 +41,7 @@ signBtn.addEventListener('click', () => {
     console.log("psbt in: ", psbtInText);
     let b = new Buffer(psbtInText);
     let s = b.toString('base64');
-    fetch(`http://127.0.0.1:5001/sign/${s}`).then((data)=>{      
+    fetch(`http://127.0.0.1:5001/sign/${s}`).then((data)=>{
         console.log("data: ", data);
         return data.text();
     }).then((text)=>{
