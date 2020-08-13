@@ -62,6 +62,7 @@ document.querySelector('#selectBtn').addEventListener('click', function (event) 
         console.log(result.canceled)
         console.log(result.filePaths)
         document.querySelector('#fileName').innerHTML = result.filePaths;
+        output.innerHTML = '<p style="color:green">File selected.</p>';
     }).catch(err => {
         console.log(err)
     });
