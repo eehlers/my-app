@@ -39,7 +39,6 @@ function sendToPython_prod() {
     });
     pyproc.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
-      //mainWindow.webContents.send('message', code);
     });
 }
 

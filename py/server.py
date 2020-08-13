@@ -11,13 +11,13 @@ app.logger.setLevel(logging.INFO)
 @app.route("/")
 @cross_origin()
 def hi():
-    app.logger.info("hi")
-    return "hi"
+    app.logger.info("Ready.")
+    return "Ready."
 
 @app.route("/install/<fileName_b64>")
 @cross_origin()
 def install(fileName_b64):
-    app.logger.info("Beginning install...")
+    app.logger.info("Installing app...")
     import base64
     fileName_bytes=base64.b64decode(fileName_b64)
     fileName_string=fileName_bytes.decode("ascii")
@@ -25,11 +25,15 @@ def install(fileName_b64):
     from cs.install import f
     return f(app.logger, fileName_string)
 
-@app.route("/sign")
+@app.route("/sign/<psbt_b64>")
 @cross_origin()
-def sign():
+def sign(psbt_b64):
+    app.logger.info("Signing PSBT...")
+    import base64
+    psbt_bytes=base64.b64decode(psbt_b64)
+    psbt_string=psbt_bytes.decode("ascii")
     from cs.sign import f
-    f()
+    return f(app.logger, psbt_string)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5001)
