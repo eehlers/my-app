@@ -42,10 +42,10 @@ signBtn.addEventListener('click', () => {
 const {dialog} = require('electron').remote;
 
 document.querySelector('#selectBtn').addEventListener('click', function (event) {
-    filters = [
+    let filters = [
         { name: 'xxx', extensions: ['*.hex'] }
     ];
-    options = {
+    let options = {
         //title: 'Select file',
         //buttonLabel: 'confirm',
         //filters: filters,
