@@ -88,10 +88,12 @@ typings/
 # Electron-Forge
 out/
 
-package-lock.json
-venv
-yarn.lock
+__pycache__
 build
 dist
-__pycache__
+package-lock.json
+server.spec
 tx_data-regtest/test06-regtest-frzn_fede-sign-a7d7d1a0.9a9a47f3
+venv
+yarn.lock
+
