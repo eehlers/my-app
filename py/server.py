@@ -14,19 +14,18 @@ def hi():
     app.logger.info("hi")
     return "hi"
 
-@app.route("/install/<foo>")
+@app.route("/install/<fileName>")
 @cross_origin()
-def install(foo):
-    app.logger.info(foo)
+def install(fileName):
+    app.logger.info(fileName)
     import base64
-    foo2=base64.b64decode(foo)
-    app.logger.info(foo2)
-    foo3=foo2.decode("ascii")
-    app.logger.info(foo3)
+    fileName_bytes=base64.b64decode(fileName)
+    app.logger.info(fileName_bytes)
+    fileName_string=fileName_bytes.decode("ascii")
+    app.logger.info(fileName_string)
     app.logger.info("*********app.logger.info()***************")
     from cs.install import f
-    f(app.logger, foo3)
-    return "install complete"
+    return f(app.logger, fileName_string)
 
 @app.route("/sign")
 @cross_origin()

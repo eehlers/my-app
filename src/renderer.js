@@ -22,10 +22,10 @@ installBtn.addEventListener('click', () => {
         return data.text();
     }).then((text)=>{
         console.log("text: ", text);
-        output.innerHTML = text;
+        output.innerHTML = `<p style="color:green">${text}</p>`;
     }).catch(e=>{
         console.log("error :", e);
-        //output.innerHTML = e;
+        output.innerHTML = `<p style="color:red">${e}</p>`;
     })
 })
 
