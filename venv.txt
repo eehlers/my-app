@@ -57,29 +57,9 @@ Setting FLASK_ENV=development causes werkzeug to restart the server
 which prevents javascript from being able to kill the process
 at shutdown.
 
-===
+# format status message
 
-    <h1>Simple Python Calculator!</h1>
-    <p>Input something like <code>1 + 1</code>.</p>
-    <input id="input" value="1 + 1"></input>
-    <input id="btn" type="button" value="Send to Python!"></input>
-    </br>
-    Got <span id="result"></span>
-
-let input = document.querySelector('#input')
-  fetch(`http://127.0.0.1:5001/calc/${input.value}`).then((data)=>{      
-    result.textContent = text;
-
-@app.route("/calc/<input>")
-@cross_origin()
-def calc(input):
-    app.logger.info("calc")
-    return calcOp(input)
-
-# alternate way to print messages from python for receipt by javascript:
-
-    print("xxxxxxxx")
-    sys.stdout.flush()
+    output.innerHTML = `<p style="color:green">${text}</p>`;
 
 ############
 # Windows

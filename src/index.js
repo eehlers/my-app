@@ -5,8 +5,8 @@ let mainWindow;
 let pyshell;
 let pyproc;
 
-let DEV=true;
-//let DEV=false;
+//let DEV=true;
+let DEV=false;
 
 function sendToPython_dev() {
     let { PythonShell } = require('python-shell');
@@ -30,11 +30,11 @@ function sendToPython_prod() {
     pyproc = require('child_process').execFile("dist/server/server")
     console.log("PID", pyproc.pid);
     pyproc.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
+      console.log(`main flask message: ${data}`);
       mainWindow.webContents.send('message', data);
     });
     pyproc.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`);
+      console.error(`main flask stderror: ${data}`);
       mainWindow.webContents.send('stderror', data);
     });
     pyproc.on('close', (code) => {

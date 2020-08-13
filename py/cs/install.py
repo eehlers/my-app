@@ -126,7 +126,6 @@ def string_to_bytes(x):
         return bytes(x)
 
 def f0(logger, fileName):
-    logger.info(f"installing file {fileName}")
     from ledgerblue.ecWrapper import PrivateKey
     from ledgerblue.comm import getDongle
     from ledgerblue.hexParser import IntelHexParser, IntelHexPrinter
@@ -353,11 +352,12 @@ def f0(logger, fileName):
         loader.run(args.bootAddr-printer.minAddr(), signature)
 
 def f(logger, fileName):
+    logger.info(f"Installing file {fileName}...")
     try:
         f0(logger, fileName)
-        status = "install complete"
+        status = "Install complete."
     except Exception as e:
-        status = f"error: {e}"
+        status = f"Error: {e}"
     logger.info(status)
     return status
 
