@@ -76,6 +76,11 @@ def calc(input):
     app.logger.info("calc")
     return calcOp(input)
 
+# alternate way to print messages from python for receipt by javascript:
+
+    print("xxxxxxxx")
+    sys.stdout.flush()
+
 ############
 # Windows
 ############

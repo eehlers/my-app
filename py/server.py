@@ -6,6 +6,7 @@ from flask_cors import cross_origin
 app = Flask(__name__)
 handler = logging.StreamHandler(sys.stdout)
 app.logger.addHandler(handler)
+app.logger.setLevel(logging.DEBUG)
 
 @app.route("/")
 @cross_origin()
@@ -13,13 +14,19 @@ def hi():
     app.logger.info("hi")
     return "hi"
 
-@app.route("/install")
+@app.route("/install/<foo>")
 @cross_origin()
-def install():
-    app.logger.info("install")
+def install(foo):
+    app.logger.info(foo)
+    import base64
+    foo2=base64.b64decode(foo)
+    app.logger.info(foo2)
+    foo3=foo2.decode("ascii")
+    app.logger.info(foo3)
+    app.logger.info("*********app.logger.info()***************")
     from cs.install import f
-    f()
-    return "install"
+    f(app.logger, foo3)
+    return "install complete"
 
 @app.route("/sign")
 @cross_origin()

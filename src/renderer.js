@@ -13,7 +13,11 @@ require('electron').ipcRenderer.on('stderror', (event, message) => {
 
 const installBtn = document.querySelector('#installBtn')
 installBtn.addEventListener('click', () => {
-    fetch("http://127.0.0.1:5001/install").then((data)=>{      
+    let foo = document.querySelector('#fileName').innerHTML;
+    let b = new Buffer(foo);
+    let s = b.toString('base64');
+    fetch(`http://127.0.0.1:5001/install/${s}`).then((data)=>{      
+        console.log("foo: ", foo);
         console.log("data: ", data);
         return data.text();
     }).then((text)=>{
@@ -21,7 +25,7 @@ installBtn.addEventListener('click', () => {
         output.innerHTML = text;
     }).catch(e=>{
         console.log("error :", e);
-        output.innerHTML = e;
+        //output.innerHTML = e;
     })
 })
 

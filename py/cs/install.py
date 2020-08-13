@@ -17,7 +17,7 @@ import os
 #(Pdb) print(args)
 #Namespace(apdu=False, apilevel=None, appFlags=2640, appName='Bitcoin', appVersion='1.3.18', bootAddr=None, curve=['secp256k1'], dataSize=64, delete=True, dep=None, deployLegacy=False, fileName='bin/app.hex', icon='010000000000ffffffffffffffffffbffe0ffc9ff99ff91ff89ff19ff39ff10ff8bffeffffffffffff', installparamsSize=None, nocrc=False, offline=None, offlineText=False, params=False, path=[''], path_slip21=None, rootPrivateKey=None, signApp=False, signApp2=None, signPrivateKey=None, signature=None, targetId=823132164, targetVersion='1.6.0', tlv=True, tlvraw=None)
 class Foo:
-    def __init__(self):
+    def __init__(self, fileName):
         self.apdu = False
         self.apilevel = None
         self.appFlags = 2640
@@ -30,7 +30,7 @@ class Foo:
         self.delete = True
         self.dep = None
         self.deployLegacy = False
-        self.fileName = "bin/app.hex"
+        self.fileName = fileName
         #self.icon = "010000000000ffffffffffffffffffbffe0ffc9ff99ff91ff89ff19ff39ff10ff8bffeffffffffffff"
         self.icon = "010000000000ffffffffffffffffffffff83c183c1f3f9f3c1f3c1f3cf83c183c1ffffffffffffffff"
         self.installparamsSize = None
@@ -125,7 +125,8 @@ def string_to_bytes(x):
     else:
         return bytes(x)
 
-def f():
+def f(logger, fileName):
+    logger.info(f"installing file {fileName}")
     from ledgerblue.ecWrapper import PrivateKey
     from ledgerblue.comm import getDongle
     from ledgerblue.hexParser import IntelHexParser, IntelHexPrinter
@@ -135,11 +136,8 @@ def f():
     import binascii
     import sys
 
-    print('Hello from Python!')
-    sys.stdout.flush()
-
 #    args = get_argparser().parse_args()
-    args = Foo()
+    args = Foo(fileName)
 
     if args.apilevel == None:
         args.apilevel = 10
@@ -355,5 +353,9 @@ def f():
         loader.run(args.bootAddr-printer.minAddr(), signature)
 
 if __name__ == '__main__':
-    f()
+    import sys, logging
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    fileName = sys.argv[1]
+    f(logger, fileName)
 
