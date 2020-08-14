@@ -48,8 +48,8 @@ document.querySelector('#selectBtn').addEventListener('click', function (event) 
 const installBtn = document.querySelector('#installBtn')
 installBtn.addEventListener('click', () => {
     if (!fileName.value) {
-        updateStatus("Error: empty file name.");
-        alert("Error: empty file name.");
+        updateStatus("Error: Empty file name.");
+        alert("Error: Empty file name.");
         return;
     }
     updateStatus("Installing app...");
