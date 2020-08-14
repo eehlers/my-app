@@ -10,13 +10,16 @@
   <body>
     <h1>CheckSig</h1>
     <h2>Install</h2>
-    <label for="fileName">File name:</label>
-    <input type="text" id="fileName">
-    <button id="selectBtn">...</button>
-    </br>
+    <table style="width:100%;border-spacing:10px">
+        <tr>
+            <td style="white-space: nowrap">File name:</td>
+            <td style="width:100%"><input type="text" id="fileName" style="width:100%"></td>
+            <td><button id="selectBtn">...</button></td>
+        </tr>
+    </table>
     <button id="installBtn">Install</button>
     <h2>Sign</h2>
-    <table style="width:100%;border-spacing:10px;border-collapse:separate">
+    <table style="width:100%;border-spacing:10px">
         <tr>
             <th>PSBT in:</th>
             <th>PSBT out:</th>
