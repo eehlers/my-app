@@ -5,8 +5,8 @@ let mainWindow;
 let pyshell;
 let pyproc;
 
-//let DEV=true;
-let DEV=false;
+let DEV=true;
+//let DEV=false;
 
 function sendToPython_dev() {
     let { PythonShell } = require('python-shell');
@@ -51,7 +51,7 @@ const createWindow = () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 600,
-        height: 700,
+        height: 800,
         webPreferences: {
           nodeIntegration: true
         }

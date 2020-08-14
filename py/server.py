@@ -14,16 +14,17 @@ def hi():
     app.logger.info("Ready.")
     return "Ready."
 
-@app.route("/install/<fileName_b64>")
+@app.route("/install/<firmware>/<sig0>/<sig1>/<sig2>/<fileName_b64>")
 @cross_origin()
-def install(fileName_b64):
+def install(firmware, sig0, sig1, sig2, fileName_b64):
     app.logger.info("Installing app...")
+    signatures = [sig0, sig1, sig2]
     import base64
     fileName_bytes=base64.b64decode(fileName_b64)
     fileName_string=fileName_bytes.decode("ascii")
     app.logger.info(f"Installing file {fileName_string}...")
     from cs.install import f
-    return f(app.logger, fileName_string)
+    return f(app.logger, firmware, signatures, fileName_string)
 
 @app.route("/sign/<psbt_b64>")
 @cross_origin()

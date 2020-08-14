@@ -17,12 +17,12 @@ import os
 #(Pdb) print(args)
 #Namespace(apdu=False, apilevel=None, appFlags=2640, appName='Bitcoin', appVersion='1.3.18', bootAddr=None, curve=['secp256k1'], dataSize=64, delete=True, dep=None, deployLegacy=False, fileName='bin/app.hex', icon='010000000000ffffffffffffffffffbffe0ffc9ff99ff91ff89ff19ff39ff10ff8bffeffffffffffff', installparamsSize=None, nocrc=False, offline=None, offlineText=False, params=False, path=[''], path_slip21=None, rootPrivateKey=None, signApp=False, signApp2=None, signPrivateKey=None, signature=None, targetId=823132164, targetVersion='1.6.0', tlv=True, tlvraw=None)
 class Foo:
-    def __init__(self, fileName):
+    def __init__(self, fileName, rootPrivateKey, signatures):
         self.apdu = False
         self.apilevel = None
         self.appFlags = 2640
-        #self.appName = "Bitcoin"
         self.appName = "test06-regtest"
+        #self.appName = "Bitcoin"
         self.appVersion = "1.3.18"
         self.bootAddr = None
         self.curve = ["secp256k1"]
@@ -40,12 +40,11 @@ class Foo:
         self.params = False
         self.path = [""]
         self.path_slip21 = None
-        self.rootPrivateKey = "f40462f8af76350149aaa4d8f788fd9b9823c0e2f15d5f99d7919267747cec6d"
+        self.rootPrivateKey = rootPrivateKey
         self.signApp = False
         self.signApp2 = None
         self.signPrivateKey = None
-        #self.signature = None
-        self.signature = ["304402207cb93364c87bbe6a810836dff9884075ac6b0cd6f08741bc5edf130d2e2523a4022015a42245c3e31b67899d0e6fc3bb785a097f0c40d94ea28f2cced63961fddfa0","3045022100a89b3a9767546160244ed82874ec658017d4c330fa21e4926190800d5f659a690220158fa7e8b3eaf3151e8ef8d84da8763fc5cdd008edf9fbedf4b5456b27e90670","3045022100b20695e02d7fbd6410922082824a81f0bad8ae9236c72df80cdde5f77d5140db022078022128fa82c766036f2b999f2afa63af6b4233d0dd3c5026f630529b2c6d4c"]
+        self.signature = signatures
         self.targetId = 823132164
         #self.targetVersion = "1.6.0"
         self.targetVersion = "1.6.0-cs"
@@ -125,7 +124,14 @@ def string_to_bytes(x):
     else:
         return bytes(x)
 
-def f0(logger, fileName):
+FIRMWARE_DICT = {
+    "1.6.0-cs" : "f40462f8af76350149aaa4d8f788fd9b9823c0e2f15d5f99d7919267747cec6d",
+    #"1.6.0-cst-2" : "xxx",
+    #"1.6.0-cs-2" : "xxx",
+}
+
+def f0(logger, firmware, signatures, fileName):
+
     from ledgerblue.ecWrapper import PrivateKey
     from ledgerblue.comm import getDongle
     from ledgerblue.hexParser import IntelHexParser, IntelHexPrinter
@@ -135,8 +141,12 @@ def f0(logger, fileName):
     import binascii
     import sys
 
+    if firmware not in FIRMWARE_DICT:
+        raise Exception(f"Unrecognized firmware: {firmware}")
+    rootPrivateKey = FIRMWARE_DICT[firmware]
+
 #    args = get_argparser().parse_args()
-    args = Foo(fileName)
+    args = Foo(fileName, rootPrivateKey, signatures)
 
     if args.apilevel == None:
         args.apilevel = 10
@@ -351,10 +361,10 @@ def f0(logger, fileName):
     else:
         loader.run(args.bootAddr-printer.minAddr(), signature)
 
-def f(logger, fileName):
+def f(logger, firmware, signatures, fileName):
     logger.info(f"Installing file {fileName}...")
     try:
-        f0(logger, fileName)
+        f0(logger, firmware, signatures, fileName)
         status = "Install complete."
     except Exception as e:
         status = f"Error: {e}"
@@ -365,6 +375,11 @@ if __name__ == '__main__':
     import sys, logging
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
-    fileName = sys.argv[1]
-    f(logger, fileName)
+    firmware = sys.argv[1]
+    sig0 = sys.argv[2]
+    sig1 = sys.argv[3]
+    sig2 = sys.argv[4]
+    fileName = sys.argv[5]
+    signatures = [sig0, sig1, sig2]
+    f(logger, firmware, signatures, fileName)
 
