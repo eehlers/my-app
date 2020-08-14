@@ -16,9 +16,16 @@
     </br>
     <button id="installBtn">Install</button>
     <h2>Sign</h2>
-    <textarea id="psbtIn" rows="10"></textarea>
-    <textarea id="psbtOut" rows="10"></textarea>
-    </br>
+    <table style="width:100%;border-spacing:10px;border-collapse:separate">
+        <tr>
+            <th>PSBT in:</th>
+            <th>PSBT out:</th>
+        </tr>
+        <tr>
+            <td><textarea id="psbtIn" rows="10" style="overflow:auto;resize:none;width:100%"></textarea></td>
+            <td><textarea id="psbtOut" rows="10"  style="overflow:auto;resize:none;width:100%"></textarea></td>
+        </tr>
+    </table>
     <button id="signBtn">Sign</button>
     <h2>Status</h2>
     <p id="output">Ready.</p>
