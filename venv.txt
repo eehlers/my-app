@@ -7,6 +7,7 @@ npm install python-shell
 #npm install tree-kill
 
 npm start
+ELECTRON_ENABLE_LOGGING=1 npm start
 FLASK_ENV=development ELECTRON_ENABLE_LOGGING=1 npm start
 
 sudo apt install rpm

@@ -10,11 +10,13 @@
   <body>
     <h1>CheckSig</h1>
     <h2>Install</h2>
-    <button id="selectBtn">Choose File</button>
-    <p id="fileName"></p>
+    <label for="fileName">File name:</label>
+    <input type="text" id="fileName">
+    <button id="selectBtn">...</button>
+    </br>
     <button id="installBtn">Install</button>
     <h2>Sign</h2>
-    <textarea id="psbtIn" rows="10">abc</textarea>
+    <textarea id="psbtIn" rows="10"></textarea>
     <textarea id="psbtOut" rows="10"></textarea>
     </br>
     <button id="signBtn">Sign</button>
