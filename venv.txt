@@ -5,6 +5,9 @@ cd my-app
 npm install python-shell
 #npm install electron-log
 #npm install tree-kill
+npm install child_process
+npm install electron-compile
+npm install electron-forge
 
 npm start
 ELECTRON_ENABLE_LOGGING=1 npm start
